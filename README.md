@@ -136,8 +136,8 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker') {
-                        sh "docker tag starbucks amonkincloud/starbucks:latest "
-                        sh "docker push amonkincloud/starbucks:latest "
+                        sh "docker tag starbucks niralak183021/starbucks:latest "
+                        sh "docker push niralak183021/starbucks:latest "
                     }
                 }
             }
@@ -146,16 +146,16 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh 'docker-scout quickview amonkincloud/starbucks:latest'
-                       sh 'docker-scout cves amonkincloud/starbucks:latest'
-                       sh 'docker-scout recommendations amonkincloud/starbucks:latest'
+                       sh 'docker-scout quickview niralak183021/starbucks:latest'
+                       sh 'docker-scout cves niralak183021/starbucks:latest'
+                       sh 'docker-scout recommendations niralak183021/starbucks:latest'
                    }
                 }
             }
         }
         stage ("Deploy to Conatiner") {
             steps {
-                sh 'docker run -d --name starbucks -p 3000:3000 amonkincloud/starbucks:latest'
+                sh 'docker run -d --name starbucks -p 3000:3000 niralak183021/starbucks:latest'
             }
         }
     }
@@ -178,11 +178,12 @@ pipeline {
                 </body>
                 </html>
             """,
-            to: 'provide_your_Email_id_here',
+            to: 'niralak183@gmail.com',
             mimeType: 'text/html',
             attachmentsPattern: 'trivy.txt'
         }
     }
 }
+
 
 ```
